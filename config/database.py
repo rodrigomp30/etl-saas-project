@@ -7,7 +7,7 @@ or a secrets manager - NEVER hardcoded.
 """
 
 import os
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
 from dotenv import load_dotenv
 import logging
@@ -78,7 +78,7 @@ def test_connection():
     try:
         engine = get_engine()
         with engine.connect() as connection:
-            connection.execute("SELECT 1")
+            connection.execute(text("SELECT 1"))
         logger.info("Database connection test successful")
         return True
     except Exception as e:
